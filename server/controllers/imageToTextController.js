@@ -24,12 +24,20 @@ const imageToTextController = async(req, res) => {
     const worker = await createWorker(lang);
     cloudinary.uploader.upload(base64, opts).then((result) => {
         (async () => {
-            const { data: { text } } = await worker.recognize(result?.url);
-            await worker.terminate();
-            res.json({
-                success: true,
-                message: text,
-            });
+            try{
+                const { data: { text } } = await worker.recognize(result?.url);
+                await worker.terminate();
+                res.json({
+                    success: true,
+                    message: text,
+                });
+            }
+            catch(err1){
+                res.json({
+                    success: false,
+                    message: err1?.message,
+                });
+            }
         })();
     }).catch((err) => {
         res.json({

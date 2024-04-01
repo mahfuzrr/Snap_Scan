@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import axios from 'axios';
 import { useRef, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import camera from '../../assets/cam.svg';
 import rotate from '../../assets/rotate.svg';
 import ConvertBase64 from '../../utils/ConvertBase64';
@@ -72,27 +73,37 @@ export default function Equation() {
                     setCameraOn(true);
                 })
                 .catch((error) => {
-                    console.error(error);
+                    toast.error(error?.message, {
+                        duration: 900,
+                        position: 'top-right',
+                    });
                 });
         } else {
-            console.log('The device does not have a camera');
+            toast.error('Does not support any camera!', {
+                duration: 900,
+                position: 'top-right',
+            });
         }
     };
 
     const takePhoto = () => {
         const imageCapture = new ImageCapture(player.current.srcObject.getVideoTracks()[0]);
-        // const img = document.getElementById('img');
         imageCapture
             .takePhoto()
             .then((blob) => {
                 setBlobData(blob);
-                console.log(blob);
+                // console.log(blob);
                 const url = window.URL.createObjectURL(blob);
                 setImageDataURL(url);
                 handleClose();
                 // window.URL.revokeObjectURL(url);
             })
-            .catch((error) => console.log(error));
+            .catch((error) =>
+                toast.error(error?.message, {
+                    duration: 900,
+                    position: 'top-right',
+                })
+            );
     };
 
     const switchCamera = async () => {
@@ -119,9 +130,12 @@ export default function Equation() {
             // Restart based on camera input
             initializeMedia();
         } else if (listOfVideoInputs.length === 1) {
-            console.log('The device has only one camera');
+            toast.error('Device has only one camera!', { duration: 900, position: 'top-right' });
         } else {
-            console.log('The device does not have a camera');
+            toast.error('Does not support any camera!', {
+                duration: 900,
+                position: 'top-right',
+            });
         }
     };
 
@@ -151,6 +165,7 @@ export default function Equation() {
             className="pt-4 pl-4 pr-4 pb-24 md:pb-12 md:ml-60 bg-bodybg min-h-screen"
         >
             <div className="p-4 flex flex-col">
+                <Toaster />
                 <div className="w-full bg-test">
                     <span className="absolute right-16 md:right-24 top-7 cursor-pointer">
                         <i className="fa-solid fa-sun shadow-md rounded-full" />
