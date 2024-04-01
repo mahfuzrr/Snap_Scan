@@ -9,7 +9,7 @@ const {
     notFoundHandler,
     errorHandler,
 } = require("./middlewares/errorHandler");
-//const logInRouter = require("./routers/logInRouter");
+
 const allApi = require("./allApi");
 
 const app = express();
