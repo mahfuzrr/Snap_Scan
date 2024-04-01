@@ -7,6 +7,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import camera from '../../assets/cam.svg';
 import rotate from '../../assets/rotate.svg';
 import ConvertBase64 from '../../utils/ConvertBase64';
+import Output from './Output';
+import StartButton from './StartButton';
 import TakeImageInput from './TakeImageInput';
 
 export default function Equation() {
@@ -278,29 +280,9 @@ export default function Equation() {
             </div>
 
             {/* start button */}
-            <div className="md:ml-10 mt-5 px-12 md:px-14">
-                <button
-                    type="button"
-                    className={`px-3 py-2 text-sm font-semibold shadow-md rounded-sm bg-primary text-white transition-all ease-in active:scale-90
-                    ${isLoading && 'opacity-60'}`}
-                    onClick={handleSubmit}
-                    disabled={isLoading}
-                >
-                    <i className={`fa-solid fa-gear ${isLoading && 'animate-spin'}`} />
-                    {!isLoading ? ' Start OCR' : ' Loading...'}
-                </button>
-            </div>
+            <StartButton isLoading={isLoading} handleSubmit={handleSubmit} />
 
-            <div
-                id="text-output"
-                className="md:w-3/4 bg-white p-4 mt-16 md:ml-24 border-2 border-bord h-auto drop-shadow-sm"
-            >
-                <p className="p-0 flex justify-end cursor-pointer">
-                    <i className="fa-solid fa-download" />
-                </p>
-                <p className="text-secondary font-medium">Text:</p>
-                <p>{resultText}</p>
-            </div>
+            <Output resultText={resultText} />
         </div>
     );
 }
