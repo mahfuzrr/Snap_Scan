@@ -1,25 +1,35 @@
+import axios from 'axios';
 import { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Bug() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const handleSubmit = (e) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const reqObejct = {
             name,
             email,
             message,
         };
-        console.log(reqObejct);
+        setIsLoading(true);
+        const data = await axios.post('http://localhost:5870/api/report-bug', reqObejct);
+        if (data?.data?.success) {
+            toast.success(data?.data?.message, {
+                position: 'top-right',
+            });
+        } else if (!data?.data?.success) {
+            toast.error(data?.data?.message, {
+                position: 'top-right',
+            });
+        }
+        setIsLoading(false);
     };
     return (
         <div id="bug-body" className="pt-4 pl-4 pr-4 pb-12 md:ml-60 bg-bodybg min-h-screen">
-            <div className="w-full bg-test">
-                <span className="absolute right-16 md:right-24 top-7 cursor-pointer">
-                    <i className="fa-solid fa-sun shadow-md rounded-full" />
-                </span>
-            </div>
+            <Toaster />
 
             <p className="mt-16 text-center font-semibold text-2xl">
                 <i className="fa-solid fa-bug text-md text-red" /> Report Bugs
@@ -58,7 +68,10 @@ export default function Bug() {
                     />
                     <button
                         type="submit"
-                        className="bg-primary mt-4 text-white p-2 font-semibold rounded-sm drop-shadow-lg active:scale-95"
+                        className={`bg-primary mt-4 text-white p-2 font-semibold rounded-sm drop-shadow-lg active:scale-95 ${
+                            isLoading && 'opacity-60 cursor-not-allowed'
+                        }`}
+                        disabled={isLoading}
                     >
                         Send
                     </button>

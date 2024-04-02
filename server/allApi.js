@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const upload = multer();
 const imageToTextController = require('./controllers/imageToTextController');
+const sendEmailController = require('./controllers/sendEmailController');
 
 // initial api endpoint
 router.get('/', (req, res) => {
@@ -13,5 +14,8 @@ router.get('/', (req, res) => {
 
 // for generating text from image
 router.post('/get-ocr-text', upload.any(), imageToTextController);
+
+// for submiting bug
+router.post('/report-bug', sendEmailController);
 
 module.exports = router;

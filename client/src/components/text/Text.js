@@ -156,7 +156,7 @@ export default function Equation() {
             base64,
         };
         setIsLoading(true);
-        const result = await axios.post('http://localhost:5000/api/get-ocr-text', reqObejct);
+        const result = await axios.post('http://localhost:5870/api/get-ocr-text', reqObejct);
         setResultText(result?.data?.message);
         setIsLoading(false);
     };
@@ -168,15 +168,10 @@ export default function Equation() {
         >
             <div className="p-4 flex flex-col">
                 <Toaster />
-                <div className="w-full bg-test">
-                    <span className="absolute right-16 md:right-24 top-7 cursor-pointer">
-                        <i className="fa-solid fa-sun shadow-md rounded-full" />
-                    </span>
-                </div>
 
-                <p className="mt-2 text-center font-semibold text-lg">
+                <h4 className="mt-1 text-center font-semibold text-lg">
                     Upload or capture photo of your text
-                </p>
+                </h4>
                 {/* language option */}
                 <div className="text-center md:text-left md:ml-16 mt-6">
                     <p className="p-0 text-md">Select Language</p>
