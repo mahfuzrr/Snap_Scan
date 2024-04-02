@@ -1,27 +1,42 @@
+import { Link } from 'react-router-dom';
+import aboutBg from '../../assets/about-bg.jpg';
+
 export default function About() {
     return (
-        <div id="about-body" className="pt-4 pl-4 pr-4 pb-12 md:ml-60 bg-bodybg min-h-screen">
-            <div className="w-full bg-test">
+        <div
+            id="about-body"
+            className="pt-4 pl-4 pr-4 pb-12 md:ml-60 bg-bodybg min-h-screen mb-10 md:mb-0"
+        >
+            {/* <div className="w-full bg-test">
                 <span className="absolute right-16 md:right-24 top-7 cursor-pointer">
                     <i className="fa-solid fa-sun shadow-md rounded-full" />
                 </span>
-            </div>
-
-            <div className="mt-24 px-6 py-4 bg-white md:w-1/2 md:mx-auto drop-shadow-lg rounded-md">
-                <span className="flex inline-block justify-end">
-                    <i className="fa-solid fa-circle-info" />
-                </span>
-                <div>
-                    <p className="font-semibold">OCR Tool:</p>
-                    <p className="text-sm text-justify">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus ipsa
-                        possimus ratione unde laborum. Nemo nisi minima, omnis, eius voluptatibus
-                        quisquam quas vero beatae in natus delectus iure quam excepturi fuga
-                        consequatur ipsum, ipsam voluptas quo recusandae accusamus quae tenetur.
-                        Similique exercitationem eaque tenetur eum vitae ut placeat, cupiditate rem.
+            </div> */}
+            <div className="w-full md:flex md:flex-row-reverse items-center">
+                <div className="w-full md:w-1/2">
+                    <img src={aboutBg} alt="about" className="pointer-events-none select-none " />
+                </div>
+                <div className="w-full md:w-1/2 md:ml-6">
+                    <p className="bg-primary text-white w-40 text-center rounded-tl-lg rounded-br-lg py-3 text-[18px] shadow-sm font-mono">
+                        SnapScan
                     </p>
-                    <p className="font-semibold mt-3">Developed By</p>
-                    <p className="text-sm font-base">Mahfuzur Rahman</p>
+                    <p className="mt-6 text-justify">
+                        SnapScan is a web application for extracting text from an image and other QR
+                        code solutions. You can upload or capture an image to extract the text from
+                        that image. Output will be depended of your image quality. More high
+                        quality, More accuracy.Scan any QR code and it will give the extracted
+                        output. It will also generate QR code for you
+                    </p>
+                    <p className="mt-8 text-sm">
+                        © Developed By{' '}
+                        <Link
+                            to="https://linkedin.com/in/maahfuz"
+                            className="underline decoration-solid decoration-2 decoration-[#6366f1]"
+                            target="_blank"
+                        >
+                            Mahfuzur Rahman
+                        </Link>
+                    </p>
                 </div>
             </div>
         </div>

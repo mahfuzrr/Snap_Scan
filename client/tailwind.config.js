@@ -12,7 +12,7 @@ module.exports = {
             white: '#FFFFFF',
             black: '#000000',
             gray: '#B8BED9',
-            bodybg: '#FAFAFA',
+            bodybg: '#F7F7F7',
             dropbox: '#F4F6F8',
             another: '#fc5c65',
             bord: '#E3E3E3',
