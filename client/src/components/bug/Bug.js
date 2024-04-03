@@ -15,7 +15,10 @@ export default function Bug() {
             message,
         };
         setIsLoading(true);
-        const data = await axios.post('http://localhost:5870/api/report-bug', reqObejct);
+        const data = await axios.post(
+            'https://snap-scan-server.vercel.app/api/report-bug',
+            reqObejct
+        );
         if (data?.data?.success) {
             toast.success(data?.data?.message, {
                 position: 'top-right',

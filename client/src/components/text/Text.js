@@ -156,7 +156,10 @@ export default function Equation() {
             base64,
         };
         setIsLoading(true);
-        const result = await axios.post('http://localhost:5870/api/get-ocr-text', reqObejct);
+        const result = await axios.post(
+            'https://snap-scan-server.vercel.app/api/get-ocr-text',
+            reqObejct
+        );
         setResultText(result?.data?.message);
         setIsLoading(false);
     };
