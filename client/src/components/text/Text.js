@@ -16,7 +16,7 @@ export default function Equation() {
     const [imageDataURL, setImageDataURL] = useState(null);
     const [blobData, setBlobData] = useState(null);
     const [imgURL, setImgUrl] = useState('');
-    const [cameraNumber, setCameraNumber] = useState(0);
+    const [front, setFront] = useState(true);
     const [cameraOn, setCameraOn] = useState(false);
     const [resultText, setResultText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -38,40 +38,23 @@ export default function Equation() {
         setCameraOn(false);
     };
 
-    const initializeMedia = async () => {
+    const initializeMedia = async (isFrontCameraOn = true) => {
         setImageDataURL(null);
-
-        // if (!('mediaDevices' in navigator)) {
-        //     navigator.mediaDevices = {};
-        // }
-
-        // if (!('getUserMedia' in navigator.mediaDevices)) {
-        //     navigator.mediaDevices.getUserMedia = function (constraints) {
-        //         const getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-
-        //         if (!getUserMedia) {
-        //             return Promise.reject(new Error('getUserMedia Not Implemented'));
-        //         }
-
-        //         return new Promise((resolve, reject) => {
-        //             getUserMedia.call(navigator, constraints, resolve, reject);
-        //         });
-        //     };
-        // }
-
         // Get the details of video inputs of the device
         const videoInputs = await getListOfVideoInputs();
 
         // The device has a camera
-        if (videoInputs.length) {
+        if (videoInputs) {
             navigator.mediaDevices
                 .getUserMedia({
-                    video: true,
+                    video: isFrontCameraOn ? { facingMode: 'user' } : { facingMode: 'environment' },
                     audio: false,
                 })
                 .then((stream) => {
-                    player.current.style.transform = 'scaleX(-1)';
+                    console.log(isFrontCameraOn);
+                    // player.current.style.transform = 'scaleX(-1)';
                     player.current.srcObject = stream;
+                    player.current.play();
                     setCameraOn(true);
                 })
                 .catch((error) => {
@@ -119,18 +102,8 @@ export default function Equation() {
                     track.stop();
                 });
             }
-
-            // switch to second camera
-            if (cameraNumber === 0) {
-                setCameraNumber(1);
-            }
-            // switch to first camera
-            else if (cameraNumber === 1) {
-                setCameraNumber(0);
-            }
-
-            // Restart based on camera input
-            initializeMedia();
+            setFront(!front);
+            initializeMedia(!front);
         } else if (listOfVideoInputs.length === 1) {
             toast.error('Device has only one camera!', { duration: 900, position: 'top-right' });
         } else {
@@ -250,7 +223,6 @@ export default function Equation() {
                             width="700"
                             height="0"
                             className="m-auto block"
-                            autoPlay
                         />
                         <div className="w-5/12 absolute m-auto left-0 right-0 bottom-2 mb-1 md:mb-0 md:bottom-10 flex justify-center align-middle">
                             <button
