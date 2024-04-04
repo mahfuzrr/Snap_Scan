@@ -155,11 +155,13 @@ export default function Equation() {
             lang,
             base64,
         };
+        console.log(reqObejct);
         setIsLoading(true);
         const result = await axios.post(
-            'https://snap-scan-server.vercel.app/api/get-ocr-text',
+            'https://snap-scan-server.onrender.com/api/get-ocr-text',
             reqObejct
         );
+        console.log(result);
         setResultText(result?.data?.message);
         setIsLoading(false);
     };

@@ -16,7 +16,7 @@ export default function Bug() {
         };
         setIsLoading(true);
         const data = await axios.post(
-            'https://snap-scan-server.vercel.app/api/report-bug',
+            'https://snap-scan-server.onrender.com/api/report-bug',
             reqObejct
         );
         if (data?.data?.success) {
