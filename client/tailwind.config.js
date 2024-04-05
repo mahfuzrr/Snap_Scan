@@ -5,9 +5,10 @@ module.exports = {
         extend: {},
         colors: {
             // nav: '#F2F8FF',
+            primary: '#5B78FF ',
             nav: '#E2EFFF',
             navcol: '#9DA3BC',
-            primary: '#4062FF',
+            // primary: '#4062FF',
             secondary: '#4062FF',
             white: '#FFFFFF',
             black: '#000000',

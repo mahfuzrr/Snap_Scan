@@ -1,6 +1,6 @@
 export default function StartButton({ isLoading, handleSubmit }) {
     return (
-        <div className="md:ml-10 mt-5 px-12 md:px-14">
+        <div className="flex justify-center md:block md:ml-10 mt-5 px-0 md:px-14">
             <button
                 type="button"
                 className={`px-3 py-2 text-sm font-semibold shadow-md rounded-sm bg-primary text-white transition-all ease-in active:scale-90

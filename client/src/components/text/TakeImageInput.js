@@ -43,7 +43,7 @@ export default function TakeImageInput({ imgURL, handleUpload, initializeMedia }
             <div className="mt-5 md:mt-0 md:ml-10">
                 <button
                     type="button"
-                    className="bg-primary px-6 py-2.5 text-white rounded drop-shadow-lg"
+                    className="bg-primary px-6 py-2.5 text-white rounded-sm drop-shadow-sm"
                     onClick={initializeMedia}
                 >
                     <i className="fa-solid fa-camera mr-2" /> Open Camera

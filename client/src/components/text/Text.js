@@ -20,6 +20,8 @@ export default function Equation() {
     const [cameraOn, setCameraOn] = useState(false);
     const [resultText, setResultText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [showCaptureControl, setShowCaptureControl] = useState(false);
+    const [isFromCamera, setIsFromCamera] = useState(false);
     const player = useRef();
 
     const getListOfVideoInputs = async () => {
@@ -51,7 +53,6 @@ export default function Equation() {
                     audio: false,
                 })
                 .then((stream) => {
-                    console.log(isFrontCameraOn);
                     // player.current.style.transform = 'scaleX(-1)';
                     player.current.srcObject = stream;
                     player.current.play();
@@ -81,6 +82,8 @@ export default function Equation() {
                 const url = window.URL.createObjectURL(blob);
                 setImageDataURL(url);
                 handleClose();
+                setShowCaptureControl(true);
+                setIsFromCamera(true);
                 // window.URL.revokeObjectURL(url);
             })
             .catch((error) =>
@@ -165,11 +168,15 @@ export default function Equation() {
                     </select>
                 </div>
                 {/* take input */}
-                <TakeImageInput
-                    imgURL={imgURL}
-                    handleUpload={handleUpload}
-                    initializeMedia={initializeMedia}
-                />
+                {isFromCamera && imageDataURL && !showCaptureControl ? (
+                    <img src={imageDataURL} alt="from-camera" className="w-full px-2 mt-2" />
+                ) : (
+                    <TakeImageInput
+                        imgURL={imgURL}
+                        handleUpload={handleUpload}
+                        initializeMedia={initializeMedia}
+                    />
+                )}
             </div>
 
             {/* output and camera */}
@@ -183,7 +190,11 @@ export default function Equation() {
                         cameraOn || imageDataURL ? 'z-10' : 'z-0'
                     }`}
                 >
-                    <div className="w-full relative">
+                    <div
+                        className={`w-full relative px-6 ${
+                            isFromCamera && !showCaptureControl ? 'hidden' : 'visible'
+                        }`}
+                    >
                         <img
                             src={imageDataURL}
                             id="img"
@@ -193,19 +204,25 @@ export default function Equation() {
                             }`}
                         />
                         <div
-                            className={`w-36 flex flex-row justify-center absolute bottom-2 right-2/5 md:right-1/2 z-30 ${
-                                imageDataURL ? 'visible' : 'hidden'
+                            className={`w-36 flex flex-row justify-center absolute bottom-2 right-1/2 md:right-1/2 z-30 ${
+                                imageDataURL && showCaptureControl ? 'visible' : 'hidden'
                             }`}
                         >
                             <button
                                 type="button"
                                 className="rounded-full active:scale-95 bg-test px-3 py-2"
+                                onClick={() => {
+                                    setBlobData(null);
+                                    setImageDataURL('');
+                                    setShowCaptureControl(false);
+                                }}
                             >
                                 <i className="fa-solid fa-circle-xmark text-white" />
                             </button>
                             <button
                                 type="button"
                                 className="rounded-full active:scale-95 bg-green px-3 py-2 ml-2"
+                                onClick={() => setShowCaptureControl(false)}
                             >
                                 <i className="fa-solid fa-circle-check text-white" />
                             </button>
@@ -254,7 +271,7 @@ export default function Equation() {
             {/* start button */}
             <StartButton isLoading={isLoading} handleSubmit={handleSubmit} />
 
-            <Output resultText={resultText} />
+            {resultText && <Output resultText={resultText} />}
         </div>
     );
 }
