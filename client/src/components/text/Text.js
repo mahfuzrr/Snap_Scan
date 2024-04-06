@@ -238,13 +238,7 @@ export default function Equation() {
                             cameraOn && imageDataURL === null ? 'visible' : 'hidden'
                         }`}
                     >
-                        <video
-                            id="video"
-                            ref={player}
-                            width="700"
-                            height="0"
-                            className="m-auto block"
-                        />
+                        <video id="video" ref={player} className="m-auto block px-5 md:px-0" />
                         <div className="w-5/12 absolute m-auto left-0 right-0 bottom-2 mb-1 md:mb-0 md:bottom-10 flex justify-center align-middle">
                             <button
                                 type="button"
