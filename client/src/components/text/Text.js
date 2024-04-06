@@ -84,6 +84,7 @@ export default function Equation() {
                 handleClose();
                 setShowCaptureControl(true);
                 setIsFromCamera(true);
+                setCameraOn(false);
                 // window.URL.revokeObjectURL(url);
             })
             .catch((error) =>
@@ -137,7 +138,6 @@ export default function Equation() {
             'https://snap-scan-server.onrender.com/api/get-ocr-text',
             reqObejct
         );
-        console.log(result);
         setResultText(result?.data?.message);
         setIsLoading(false);
     };
@@ -169,7 +169,11 @@ export default function Equation() {
                 </div>
                 {/* take input */}
                 {isFromCamera && imageDataURL && !showCaptureControl ? (
-                    <img src={imageDataURL} alt="from-camera" className="w-full px-2 mt-2" />
+                    <img
+                        src={imageDataURL}
+                        alt="from-camera"
+                        className="w-full md:w-96 px-2 mt-2"
+                    />
                 ) : (
                     <TakeImageInput
                         imgURL={imgURL}
@@ -182,12 +186,12 @@ export default function Equation() {
             {/* output and camera */}
             <div
                 className={`w-full mt-10 md:mt-0 md:ml-10 ${
-                    cameraOn || imageDataURL ? 'visible' : 'hidden'
+                    cameraOn || (imageDataURL && showCaptureControl) ? 'visible' : 'hidden'
                 }`}
             >
                 <div
                     className={`absolute w-full min-h-screen top-20 left-0 ${
-                        cameraOn || imageDataURL ? 'z-10' : 'z-0'
+                        cameraOn ? 'z-10' : 'z-0'
                     }`}
                 >
                     <div
@@ -269,7 +273,13 @@ export default function Equation() {
             </div>
 
             {/* start button */}
-            <StartButton isLoading={isLoading} handleSubmit={handleSubmit} />
+            <StartButton
+                isLoading={isLoading}
+                handleSubmit={handleSubmit}
+                setImgUrl={setImgUrl}
+                setImageDataURL={setImageDataURL}
+                show={imgURL || imageDataURL}
+            />
 
             {resultText && <Output resultText={resultText} />}
         </div>

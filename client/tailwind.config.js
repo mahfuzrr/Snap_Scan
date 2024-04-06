@@ -19,6 +19,7 @@ module.exports = {
             bord: '#E3E3E3',
             test: '#F91919',
             green: '#20bf6b',
+            warn: '#ff3f34',
         },
         // scale: {
         //     '20': '1.25',
