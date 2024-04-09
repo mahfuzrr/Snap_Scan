@@ -50,8 +50,8 @@ export default function QrCode() {
         setCameraMode(cameraMode1);
         const html5QrCode = new Html5Qrcode('reader');
         const config = { fps: 10, qrbox: qrboxFunction };
-        html5QrCode.start({ facingMode: cameraMode1 }, config, (text, res) => {
-            console.log(text, res);
+        html5QrCode.start({ facingMode: cameraMode1 }, config, (text) => {
+            setResult(text);
         });
     };
 
