@@ -11,7 +11,7 @@ import Output from './Output';
 import StartButton from './StartButton';
 import TakeImageInput from './TakeImageInput';
 
-export default function Equation() {
+export default function Text() {
     const [lang, setLang] = useState('eng');
     const [imageDataURL, setImageDataURL] = useState(null);
     const [blobData, setBlobData] = useState(null);

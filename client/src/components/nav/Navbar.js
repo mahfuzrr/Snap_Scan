@@ -44,6 +44,23 @@ export default function Navbar() {
                     <li className="text-center rounded-lg flex items-center group/item ">
                         <p
                             className={`w-1 bg-primary py-4 invisible md:group-hover/item:visible ${
+                                url === '/qr-code' && 'md:visible'
+                            } rounded-r-sm`}
+                        />
+                        <Link
+                            to="/qr-code"
+                            className={`hover:bg-primary ${
+                                url === '/qr-code' && 'bg-primary text-white'
+                            } transition ease-in w-full flex flex-col md:flex-row hover:text-white rounded-sm ml-4 items-center py-2 px-3 text-base font-medium text-navcol dark:text-white dark:hover:bg-gray-700`}
+                        >
+                            <i className="fa-solid fa-qrcode" />
+                            <span className="ml-6 md:inline hidden">QR Code</span>
+                        </Link>
+                    </li>
+
+                    <li className="text-center rounded-lg flex items-center group/item ">
+                        <p
+                            className={`w-1 bg-primary py-4 invisible md:group-hover/item:visible ${
                                 url === '/how-works' && 'md:visible'
                             } rounded-r-sm`}
                         />
