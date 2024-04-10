@@ -10,6 +10,7 @@ export default function QrCode() {
     const [isFromCamera, setIsFromCamera] = useState(true);
     const [cameraMode, setCameraMode] = useState(null);
     const [result, setResult] = useState(null);
+    const [rdr, setRdr] = useState(null);
 
     const handleUpload = (e) => {
         if (e.target.files[0]) {
@@ -49,9 +50,16 @@ export default function QrCode() {
         else cameraMode1 = 'user';
         setCameraMode(cameraMode1);
         const html5QrCode = new Html5Qrcode('reader');
+        setRdr(html5QrCode);
         const config = { fps: 10, qrbox: qrboxFunction };
         html5QrCode.start({ facingMode: cameraMode1 }, config, (text) => {
             setResult(text);
+        });
+    };
+
+    const handleCloseCamera = () => {
+        rdr.stop().then(() => {
+            setIsOpen(false);
         });
     };
 
@@ -68,7 +76,10 @@ export default function QrCode() {
                 </h4>
                 {/* output and camera */}
                 <div className="w-full flex flex-col justify-center items-center">
-                    <div id="reader" className={`w-full md:w-1/3 m-auto ${imgURL && 'hidden'}`} />
+                    <div
+                        id="reader"
+                        className={`w-full md:w-1/3 m-auto ${isFromCamera ? 'visible' : 'hidden'}`}
+                    />
                     {isOpen && (
                         <button
                             type="button"
@@ -79,7 +90,14 @@ export default function QrCode() {
                         </button>
                     )}
                 </div>
-                {result && <ResultBar result={result} />}
+                {result && (
+                    <ResultBar
+                        result={result}
+                        setResult={setResult}
+                        setImgUrl={setImgUrl}
+                        handleCloseCamera={handleCloseCamera}
+                    />
+                )}
 
                 <div className="flex flex-col items-center mt-8 md:mt-20">
                     {isFromCamera ? (

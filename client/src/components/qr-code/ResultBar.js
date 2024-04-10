@@ -1,7 +1,18 @@
+import copy from 'copy-to-clipboard';
 import { useState } from 'react';
 
-export default function ResultBar({ result }) {
+export default function ResultBar({ result, setResult, setImgUrl, handleCloseCamera }) {
     const [open, setOpen] = useState(true);
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = () => {
+        copy(result);
+        setCopied(true);
+        setTimeout(() => {
+            setCopied(false);
+        }, 1000);
+    };
+
     return (
         <div className={`w-full relative z-10 ${open ? 'visible' : 'hidden'}`}>
             <div className="fixed inset-0 bg-gray bg-opacity-75 transition-opacity" />
@@ -11,10 +22,18 @@ export default function ResultBar({ result }) {
                         Decoded Result
                     </h4>
                     <div className="mt-5 bg-[#f3f4f6] py-4 px-5 rounded-sm relative">
-                        <span className="absolute top-0 right-2 text-primary border px-2 text-base mt-1 bg-white active:opacity-70 active:scale-95 rounded-sm">
-                            <i>
-                                <i className="fa-solid fa-copy" />
-                            </i>
+                        <span
+                            role="presentation"
+                            className={`absolute top-0 right-2 cursor-pointer border ${
+                                !copied ? 'border-primary' : 'border-[#20bf6b]'
+                            } px-2 text-base mt-1 bg-white active:opacity-70 active:scale-95 rounded-sm`}
+                            onClick={handleCopy}
+                        >
+                            {!copied ? (
+                                <i className="fa-solid fa-copy text-primary" />
+                            ) : (
+                                <i className="fa-solid fa-check  text-[#20bf6b]" />
+                            )}
                         </span>
                         <p className="mt-4">{result}</p>
                     </div>
@@ -25,7 +44,12 @@ export default function ResultBar({ result }) {
                     <button
                         type="button"
                         className="relative w-full flex justify-center rounded-sm py-2 text-gray-300 hover:text-white focus:outline-none transition-all ease-in duration-200 focus:ring-2 focus:ring-white hover:bg-another"
-                        onClick={() => setOpen(false)}
+                        onClick={() => {
+                            setOpen(false);
+                            setResult(null);
+                            setImgUrl('');
+                            handleCloseCamera();
+                        }}
                     >
                         <span className="absolute -inset-2.5" />
                         <span className="sr-only">Close panel</span>
