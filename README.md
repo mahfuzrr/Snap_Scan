@@ -11,6 +11,7 @@ Snap Scan is a scanner tool for extracting text from images (OCR) and decoding Q
 ## Built With
 
 - [React Js](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - [Node Js](https://nodejs.org/en)
 - [Express Js](https://expressjs.com/)
 - [Tesseract.js](https://tesseract.projectnaptha.com/)
