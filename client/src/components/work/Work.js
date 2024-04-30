@@ -21,7 +21,7 @@ export default function Work() {
                             <div className="w-full bg-gray rounded items-center align-middle align-center flex-1">
                                 <div
                                     className="w-0 bg-secondary py-1 rounded"
-                                    style={{ width: '100%;' }}
+                                    style={{ width: '100%' }}
                                 />
                             </div>
                         </div>
@@ -37,7 +37,7 @@ export default function Work() {
                             </p>
                             <p className="text-center font-semibold text-lg mt-1.5">Upload Image</p>
                             <p className="text-center text-xs mt-1">
-                                Upload or capture the image of the equation
+                                Upload or capture the image your input image
                             </p>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ export default function Work() {
                             <div className="w-full bg-gray rounded items-center align-middle align-center flex-1">
                                 <div
                                     className="w-0 bg-secondary py-1 rounded"
-                                    style={{ width: '100%;' }}
+                                    style={{ width: '100%' }}
                                 />
                             </div>
                         </div>
@@ -72,7 +72,7 @@ export default function Work() {
                             <p className="text-center font-semibold text-lg mt-1.5">Process</p>
                             <p className="text-center text-xs mt-1">
                                 Machine learning algorithm process the image and identify the
-                                letters and numbers
+                                content
                             </p>
                         </div>
                     </div>
@@ -89,7 +89,7 @@ export default function Work() {
                             <div className="w-full bg-gray rounded items-center align-middle align-center flex-1">
                                 <div
                                     className="w-0 bg-secondary py-1 rounded"
-                                    style={{ width: '100%;' }}
+                                    style={{ width: '100%' }}
                                 />
                             </div>
                         </div>

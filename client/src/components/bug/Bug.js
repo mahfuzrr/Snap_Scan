@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function Bug() {
@@ -7,6 +8,8 @@ export default function Bug() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const recaptchaRef = useRef();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const reqObejct = {
@@ -14,20 +17,46 @@ export default function Bug() {
             email,
             message,
         };
-        setIsLoading(true);
-        const data = await axios.post(
-            'https://snap-scan-server.onrender.com/api/report-bug',
-            reqObejct
-        );
-        if (data?.data?.success) {
-            toast.success(data?.data?.message, {
+        const captchaValue = recaptchaRef.current.getValue();
+        if (!captchaValue) {
+            toast.error('Please verify the reCAPTCHA!', {
                 position: 'top-right',
             });
-        } else if (!data?.data?.success) {
-            toast.error(data?.data?.message, {
+            return;
+        }
+
+        setIsLoading(true);
+
+        const captchaValidate = await axios.post(
+            'https://snap-scan-server.onrender.com/api/verify-captcha',
+            {
+                captchaValue,
+            }
+        );
+
+        if (captchaValidate?.data?.message?.success) {
+            const data = await axios.post(
+                'https://snap-scan-server.onrender.com/api/report-bug',
+                reqObejct
+            );
+            if (data?.data?.success) {
+                toast.success(data?.data?.message, {
+                    position: 'top-right',
+                });
+            } else if (!data?.data?.success) {
+                toast.error(data?.data?.message, {
+                    position: 'top-right',
+                });
+            }
+            setName('');
+            setEmail('');
+            setMessage('');
+        } else {
+            toast.error('Captcha validation is wrong!', {
                 position: 'top-right',
             });
         }
+
         setIsLoading(false);
     };
     return (
@@ -68,6 +97,11 @@ export default function Bug() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         required
+                    />
+                    <ReCAPTCHA
+                        className="mt-5"
+                        ref={recaptchaRef}
+                        sitekey={process.env.REACT_APP_SITE_KEY}
                     />
                     <button
                         type="submit"

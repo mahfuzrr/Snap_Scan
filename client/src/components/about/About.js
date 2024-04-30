@@ -25,7 +25,7 @@ export default function About() {
                         code solutions. You can upload or capture an image to extract the text from
                         that image. Output will be depended of your image quality. More high
                         quality, More accuracy.Scan any QR code and it will give the extracted
-                        output. It will also generate QR code for you
+                        output.
                     </p>
                     <p className="mt-8 text-sm">
                         © Developed By{' '}
