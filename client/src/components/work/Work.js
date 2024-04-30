@@ -1,12 +1,15 @@
 export default function Work() {
     return (
-        <div id="work-body" className="pt-4 pl-4 pr-4 pb-12 md:ml-60 bg-bodybg min-h-screen">
-            <p className="mt-8 text-center w-3/4 pl-10 font-bold text-2xl">
+        <div
+            id="work-body"
+            className="pt-4 pl-0 md:pl-4 pr-0 md:pr-4 pb-12 ml-0 md:ml-60 bg-bodybg min-h-screen"
+        >
+            <p className="mt-8 text-center w-full md:w-3/4 pl-10 font-bold text-2xl">
                 <i className="fa-solid fa-gears mr-2 text-[#5B78FF]" />
                 How OCR works ?
             </p>
 
-            <div className="flex flex-col mb-12 md:mb-0 md:flex-row mx-auto mt-16 xl:w-4/5">
+            <div className="flex flex-col mb-12 md:mb-0 md:flex-row mx-auto mt-16 w-full xl:w-4/5">
                 <div className="w-1/2 md:mx-0 mx-auto">
                     <div className="relative mb-2">
                         <div
