@@ -77,7 +77,8 @@ export default function QrCode() {
                 <Toaster />
 
                 <h4 className="mt-1 text-center font-semibold text-lg">
-                    Upload or capture photo of QR Code
+                    <i className="fa-solid fa-cloud-arrow-up mr-2" /> Upload or capture photo of QR
+                    Code
                 </h4>
                 {/* output and camera */}
                 <div className="w-full flex flex-col justify-center items-center">

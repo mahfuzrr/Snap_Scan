@@ -1,15 +1,12 @@
 export default function Work() {
     return (
         <div id="work-body" className="pt-4 pl-4 pr-4 pb-12 md:ml-60 bg-bodybg min-h-screen">
-            <div className="w-full bg-test">
-                <span className="absolute right-16 md:right-24 top-7 cursor-pointer">
-                    <i className="fa-solid fa-sun shadow-md rounded-full" />
-                </span>
-            </div>
+            <p className="mt-8 text-center w-3/4 pl-10 font-bold text-2xl">
+                <i className="fa-solid fa-gears mr-2 text-[#5B78FF]" />
+                How OCR works ?
+            </p>
 
-            <p className="mt-10 text-center w-3/4 pl-10 font-bold text-3xl">How it Works?</p>
-
-            <div className="flex flex-col md:flex-row mx-auto mt-20 xl:w-4/5">
+            <div className="flex flex-col mb-12 md:mb-0 md:flex-row mx-auto mt-16 xl:w-4/5">
                 <div className="w-1/2 md:mx-0 mx-auto">
                     <div className="relative mb-2">
                         <div
@@ -30,7 +27,7 @@ export default function Work() {
                         </div>
                     </div>
 
-                    <div className="p-4 w-56 mx-auto bg-white dark:bg-gray drop-shadow-lg rounded-sm mt-10">
+                    <div className="p-4 w-56 mx-auto bg-white dark:bg-gray drop-shadow-lg rounded-sm mt-4">
                         <div className="w-full flex flex-col justify-center align-center px-2 py-10 rounded-sm">
                             <p className="text-center">
                                 <i className="fa-solid fa-file text-primary text-3xl" />
@@ -64,7 +61,7 @@ export default function Work() {
                         </div>
                     </div>
 
-                    <div className="p-4 w-56 mx-auto bg-white dark:bg-gray drop-shadow-lg rounded-sm mt-10">
+                    <div className="p-4 w-56 mx-auto bg-white dark:bg-gray drop-shadow-lg rounded-sm mt-4">
                         <div className="w-full flex flex-col justify-center align-center px-2 py-8 rounded-sm">
                             <p className="text-center">
                                 <i className="fa-solid fa-file text-primary text-3xl" />
@@ -99,7 +96,7 @@ export default function Work() {
                         </div>
                     </div>
 
-                    <div className="p-4 w-56 mx-auto bg-white dark:bg-gray drop-shadow-lg rounded-sm mt-10">
+                    <div className="p-4 w-56 mx-auto bg-white dark:bg-gray drop-shadow-lg rounded-sm mt-4">
                         <div className="w-full flex flex-col justify-center align-center px-2 py-12 rounded-sm">
                             <p className="text-center">
                                 <i className="fa-solid fa-file text-primary text-3xl" />

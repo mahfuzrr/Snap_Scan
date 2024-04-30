@@ -151,7 +151,8 @@ export default function Text() {
                 <Toaster />
 
                 <h4 className="mt-1 text-center font-semibold text-lg">
-                    Upload or capture photo of your text
+                    <i className="fa-solid fa-cloud-arrow-up mr-2" /> Upload or capture photo of
+                    your text
                 </h4>
                 {/* language option */}
                 <div className="text-center md:text-left md:ml-16 mt-6">
