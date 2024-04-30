@@ -63,7 +63,7 @@ export default function Bug() {
         <div id="bug-body" className="pt-4 pl-4 pr-4 pb-12 md:ml-60 bg-bodybg min-h-screen">
             <Toaster />
 
-            <p className="mt-16 text-center font-semibold text-2xl">
+            <p className="mt-6 text-center font-semibold text-2xl">
                 <i className="fa-solid fa-bug text-md text-red" /> Report Bugs
             </p>
             <p className="mt-2 text-center text-md">
