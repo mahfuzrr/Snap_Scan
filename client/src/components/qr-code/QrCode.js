@@ -1,6 +1,6 @@
 import { Html5Qrcode } from 'html5-qrcode';
 import { useState } from 'react';
-import { Toaster } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
 import ResultBar from './ResultBar';
 import TakeInput from './TakeInput';
 
@@ -14,6 +14,7 @@ export default function QrCode() {
 
     const handleUpload = (e) => {
         if (e.target.files[0]) {
+            console.log(e.target.files[0]);
             const url = URL.createObjectURL(e.target.files[0]);
             setImgUrl(url);
             const html5QrCode = new Html5Qrcode('reader');
@@ -24,7 +25,10 @@ export default function QrCode() {
                     setResult(decodedText);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    toast.error(err, {
+                        position: 'top-right',
+                        duration: 900,
+                    });
                 });
         }
     };
@@ -58,8 +62,9 @@ export default function QrCode() {
     };
 
     const handleCloseCamera = () => {
-        rdr.stop().then(() => {
+        rdr?.stop().then(() => {
             setIsOpen(false);
+            setRdr(null);
         });
     };
 
@@ -118,7 +123,12 @@ export default function QrCode() {
                     <span
                         role="presentation"
                         className="underline decoration-2 decoration-solid cursor-pointer decoration-[#0ea5e9] text-sm"
-                        onClick={() => setIsFromCamera(!isFromCamera)}
+                        onClick={() => {
+                            if (isFromCamera) {
+                                handleCloseCamera();
+                            }
+                            setIsFromCamera(!isFromCamera);
+                        }}
                     >
                         {!isFromCamera ? 'Scan using Camera' : 'Scan from file'}
                     </span>

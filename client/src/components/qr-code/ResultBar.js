@@ -16,12 +16,17 @@ export default function ResultBar({ result, setResult, setImgUrl, handleCloseCam
     return (
         <div className={`w-full relative z-10 ${open ? 'visible' : 'hidden'}`}>
             <div className="fixed inset-0 bg-gray bg-opacity-75 transition-opacity" />
-            <div className="w-full md:w-1/3 fixed top-1/2 left-0 md:left-2/3 bottom-0 md:right-0 md:top-0 md:min-h-screen bg-white rounded-tl-3xl rounded-tr-3xl md:rounded-none">
+
+            <div className="w-full md:w-1/3 fixed top-1/3 left-0 md:left-2/3 bottom-0 md:right-0 md:top-0 md:min-h-screen bg-white rounded-tl-[30px] rounded-tr-[30px] md:rounded-none">
                 <div className="p-5">
-                    <h4 className="text-center mt-0 md:mt-8 font-semibold text-lg">
-                        Decoded Result
+                    <h4 className="text-center mt-0 md:mt-8 font-semibold text-[20px]">
+                        <span className="before:block before:absolute before:-inset-1 mt-5 md:mt-0 md:ml-10 before:-skew-y-1 px-3 before:bg-another relative inline-block">
+                            <span className="relative flex items-center justify-center font-bold text-white">
+                                Decoded Result
+                            </span>
+                        </span>
                     </h4>
-                    <div className="mt-5 bg-[#f3f4f6] py-4 px-5 rounded-sm relative">
+                    <div className="mt-10 bg-[#f3f4f6] bg-gradient-to-r shadow-sm py-4 px-5 rounded-sm relative">
                         <span
                             role="presentation"
                             className={`absolute top-0 right-2 cursor-pointer border ${
@@ -40,7 +45,7 @@ export default function ResultBar({ result, setResult, setImgUrl, handleCloseCam
                 </div>
             </div>
             <div className="relative">
-                <div className="fixed bottom-16 md:bottom-full left-1/2 md:left-auto  md:right-1/3 md:top-0 w-10">
+                <div className="fixed top-2 right-2 md:right-1/3 md:top-0 w-10">
                     <button
                         type="button"
                         className="relative w-full flex justify-center rounded-sm py-2 text-gray-300 hover:text-white focus:outline-none transition-all ease-in duration-200 focus:ring-2 focus:ring-white hover:bg-another"
