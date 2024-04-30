@@ -265,8 +265,8 @@ export default function Text() {
                     </div>
                 </div>
             </div>
-
             {/* start button */}
+
             <StartButton
                 isLoading={isLoading}
                 handleSubmit={handleSubmit}
@@ -274,6 +274,11 @@ export default function Text() {
                 setImageDataURL={setImageDataURL}
                 show={imgURL || imageDataURL}
             />
+            {isLoading && (
+                <p className="mt-2 md:ml-16 md:pl-8 text-[12px] font-semibold text-center md:text-left">
+                    Please wait, it can take quite few times
+                </p>
+            )}
 
             {resultText && <Output resultText={resultText} />}
         </div>
